@@ -1,0 +1,28 @@
+.postContainer {
+  display: flex;
+  padding: 7px 7px;
+}
+
+h1 {
+  margin: 0 0 10px 0;
+}
+
+.editButton {
+  margin-left: auto;
+}
+
+.editView {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.editView input {
+  margin-bottom: 5px;
+}
+
+.editView .controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
