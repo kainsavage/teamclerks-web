@@ -18,7 +18,7 @@ export default class extends Component {
           { UserService.isLoggedIn() &&
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/post/new">New Post</Link></li>
+              <li><Link to="/new-post">New Post</Link></li>
               <li><Link to="/logout">Logout</Link></li>
             </ul>
           }

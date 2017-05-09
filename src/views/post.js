@@ -4,6 +4,8 @@ import UserService from '../services/user';
 import NotFound from './404';
 import Post from '../models/post';
 
+import PostEditor from '../components/post-editor';
+
 import './css/post.css';
 
 export default class extends Component {
@@ -13,33 +15,25 @@ export default class extends Component {
     this.state = {
       id:    props.match.params.id,
       post:  new Post(),
-      newPost: props.newPost,
       editedPost: null,
       previewPost: null,
-      notFound: false,
-      errors: []
+      notFound: false
     };
 
-    this.edit = this.edit.bind(this);
-    this.inputChanged = this.inputChanged.bind(this);
-    this.cancel = this.cancel.bind(this);
-    this.save = this.save.bind(this);
+    this.onEdit = this.onEdit.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   async componentWillMount() {
-    if(this.state.newPost) {
-      this.edit();
+    try {
+      this.setState({
+        post:  await PostService.getPost(this.state.id),
+        notFound: false
+      });
     }
-    else {
-      try {
-        this.setState({
-          post:  await PostService.getPost(this.state.id),
-          notFound: false
-        });
-      }
-      catch(e) {
-        this.setState({notFound:true});
-      }
+    catch(e) {
+      this.setState({notFound:true});
     }
   }
 
@@ -59,39 +53,16 @@ export default class extends Component {
     }
   }
 
-  edit() {
+  onEdit() {
     this.setState({editedPost:Object.assign(new Post(),this.state.post)});
   }
 
-  inputChanged(event) {
-    let editedPost = this.state.editedPost;
-    editedPost[event.target.name] = event.target.value;
-    this.setState({editedPost});
+  onCancel() {
+    this.setState({editedPost:null});
   }
 
-  cancel() {
-    this.setState({editedPost:null,errors:[]});
-  }
-
-  async save() {
-    this.setState({errors:[]});
-    let result;
-    
-    if(this.state.newPost) {
-      result = await PostService.newPost(this.state.editedPost);
-    }
-    else {
-      result = await PostService.editPost(this.state.editedPost);
-    }
-
-    if(result.errors) {
-      this.setState({errors: result.errors});
-    }
-    else {
-      await this.props.onUpdateMetadata();
-
-      this.setState({post:this.state.editedPost,editedPost:null});
-    }
+  onSave(post) {
+    this.setState({post:post,editedPost:null});
   }
 
   render() {
@@ -103,19 +74,7 @@ export default class extends Component {
 
     if(UserService.isLoggedIn() && this.state.editedPost) {
       return (
-        <div className="postContainer">
-          <div className="editView">
-            {this.state.errors.map( (error, index) => 
-              <div className="errors" key={index}>{error}</div>
-            )}
-            <input type="text" name="title" value={this.state.editedPost.title} onChange={this.inputChanged} />
-            <textarea name="content" value={this.state.editedPost.content} onChange={this.inputChanged}></textarea>
-            <div className="controls">
-              <button className="cancelButton" onClick={this.cancel}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-              <button className="saveButton" onClick={this.save}><i className="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-            </div>
-          </div>
-        </div>
+        <PostEditor post={this.state.editedPost} onUpdateMetadata={this.props.onUpdateMetadata} onCancel={this.onCancel} onSave={this.onSave} />
       );
     }
 
@@ -126,7 +85,7 @@ export default class extends Component {
           <div>{this.state.post.content}</div>
         </div>
         {UserService.isLoggedIn() && (
-          <a onClick={this.edit} className="editButton"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+          <a onClick={this.onEdit} className="editButton"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
         )}
       </div>
     );

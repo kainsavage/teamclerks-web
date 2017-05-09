@@ -63,7 +63,7 @@ export default class {
       body: data
     }));
 
-    return new Post(await response.json());
+    return await response.json();
   }
 
   static async newPost(post) {
@@ -79,6 +79,6 @@ export default class {
       body: data
     });
 
-    return new Post(await response.json());
+    return await response.json();
   }
 }
