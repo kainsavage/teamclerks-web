@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+
 import PostService from '../services/post';
 import UserService from '../services/user';
 import NotFound from './404';
 import Post from '../models/post';
 
 import PostEditor from '../components/post-editor';
+import {Markdown} from '../components/markdown';
 
 import './css/post.css';
 
@@ -82,7 +84,7 @@ export default class extends Component {
       <div className="postContainer">
         <div className="readView">
           <h1>{this.state.post.title}</h1>
-          <div>{this.state.post.content}</div>
+          <Markdown content={this.state.post.content}/>
         </div>
         {UserService.isLoggedIn() && (
           <a onClick={this.onEdit} className="editButton"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
