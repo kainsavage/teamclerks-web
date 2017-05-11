@@ -1,0 +1,23 @@
+.editView textarea {
+  min-height: 600px;
+}
+
+.editButton {
+  margin-left: auto;
+}
+
+.editView {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.editView input {
+  margin-bottom: 5px;
+}
+
+.editView .controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

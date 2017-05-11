@@ -5,8 +5,8 @@ import UserService from '../services/user';
 import NotFound from './404';
 import Post from '../models/post';
 
+import PostView from '../components/post-view';
 import PostEditor from '../components/post-editor';
-import {Markdown} from '../components/markdown';
 
 import './css/post.css';
 
@@ -76,19 +76,15 @@ export default class extends Component {
 
     if(UserService.isLoggedIn() && this.state.editedPost) {
       return (
-        <PostEditor post={this.state.editedPost} onUpdateMetadata={this.props.onUpdateMetadata} onCancel={this.onCancel} onSave={this.onSave} />
+        <div className="postContainer">
+          <PostEditor post={this.state.editedPost} onUpdateMetadata={this.props.onUpdateMetadata} onCancel={this.onCancel} onSave={this.onSave} />
+        </div>
       );
     }
 
     return (
       <div className="postContainer">
-        <div className="readView">
-          <h1>{this.state.post.title}</h1>
-          <Markdown content={this.state.post.content}/>
-        </div>
-        {UserService.isLoggedIn() && (
-          <a onClick={this.onEdit} className="editButton"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-        )}
+        <PostView post={this.state.post} onEdit={this.onEdit} />
       </div>
     );
   }

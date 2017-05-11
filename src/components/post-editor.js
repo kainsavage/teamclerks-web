@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
+import PostView from './post-view';
 import PostService from '../services/post';
+
+import './css/post-editor.css';
 
 export default class extends Component {
   constructor(props) {
@@ -8,13 +11,15 @@ export default class extends Component {
 
     this.state = {
       post: Object.assign({},this.props.post),
+      preview: false,
       errors: []
     };
 
     this.inputChanged = this.inputChanged.bind(this);
-    this.save = this.save.bind(this);
+    this.onSave = this.onSave.bind(this);
+    this.onPreview = this.onPreview.bind(this);
+    this.onEdit = this.onEdit.bind(this);
   }
-
 
   inputChanged(event) {
     let post = this.state.post;
@@ -22,7 +27,7 @@ export default class extends Component {
     this.setState({post});
   }
 
-  async save() {
+  async onSave() {
     this.setState({errors:[]});
     let result;
     
@@ -46,7 +51,27 @@ export default class extends Component {
     }
   }
 
+  onPreview() {
+    this.setState({preview:true});
+  }
+
+  onEdit() {
+    this.setState({preview:false});
+  }
+
   render() {
+    if(this.state.preview) {
+      return (
+        <div className="postContainer">
+          <div className="editView">
+            <PostView post={this.state.post} />
+            <div className="controls">
+              <button className="cancelButton" onClick={this.onEdit}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="postContainer">
         <div className="editView">
@@ -56,8 +81,9 @@ export default class extends Component {
           <input type="text" name="title" value={this.state.post.title} onChange={this.inputChanged} />
           <textarea name="content" value={this.state.post.content} onChange={this.inputChanged}></textarea>
           <div className="controls">
+            <button className="previewButton" onClick={this.onPreview}><i className="fa fa-eye" aria-hidden="true"></i> Preview</button>
             <button className="cancelButton" onClick={this.props.onCancel}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-            <button className="saveButton" onClick={this.save}><i className="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+            <button className="saveButton" onClick={this.onSave}><i className="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
           </div>
         </div>
       </div>
