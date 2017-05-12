@@ -62,29 +62,25 @@ export default class extends Component {
   render() {
     if(this.state.preview) {
       return (
-        <div className="postContainer">
-          <div className="editView">
-            <PostView post={this.state.post} />
-            <div className="controls">
-              <button className="cancelButton" onClick={this.onEdit}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-            </div>
+        <div className="editView">
+          <PostView post={this.state.post} />
+          <div className="controls">
+            <button className="cancelButton" onClick={this.onEdit}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
           </div>
         </div>
       );
     }
     return (
-      <div className="postContainer">
-        <div className="editView">
-          {this.state.errors.map( (error, index) => 
-            <div className="errors" key={index}>{error}</div>
-          )}
-          <input type="text" name="title" value={this.state.post.title} onChange={this.inputChanged} />
-          <textarea name="content" value={this.state.post.content} onChange={this.inputChanged}></textarea>
-          <div className="controls">
-            <button className="previewButton" onClick={this.onPreview}><i className="fa fa-eye" aria-hidden="true"></i> Preview</button>
-            <button className="cancelButton" onClick={this.props.onCancel}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-            <button className="saveButton" onClick={this.onSave}><i className="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-          </div>
+      <div className="editView">
+        {this.state.errors.map( (error, index) => 
+          <div className="errors" key={index}>{error}</div>
+        )}
+        <input type="text" name="title" value={this.state.post.title} onChange={this.inputChanged} />
+        <textarea name="content" value={this.state.post.content} onChange={this.inputChanged}></textarea>
+        <div className="controls">
+          <button className="previewButton" onClick={this.onPreview}><i className="fa fa-eye" aria-hidden="true"></i> Preview</button>
+          <button className="cancelButton" onClick={this.props.onCancel}><i className="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+          <button className="saveButton" onClick={this.onSave}><i className="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
         </div>
       </div>
     );
