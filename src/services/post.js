@@ -9,7 +9,7 @@ export default class {
   static async getPosts() {
     let posts = [];
 
-    let response = await fetch(new Request(config.service + 'posts'));
+    let response = await fetch(new Request(config.serviceHost + 'posts'));
     let json = await response.json();
 
     json.forEach( (data) => {
@@ -17,6 +17,14 @@ export default class {
     });
 
     return posts;
+  }
+
+  /**
+   * 
+   */
+  static async getLatestPost() {
+    let response = await fetch(new Request(config.serviceHost + 'posts/latest'));
+    return new Post(await response.json());
   }
 
   /**
