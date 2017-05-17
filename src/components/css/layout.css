@@ -10,16 +10,16 @@
 aside.left {
   flex: 1 6 20%;
   order: 1;
-  background: #ccccff;
+  /*background: #ccccff;*/
 }
 
 article {
   flex: 3 1 60%; order: 2;
-  background: #dddd88;
+  /*background: #dddd88;*/
 }
 
 aside.right {
   flex: 1 6 20%;
   order: 3;
-  background: #ccccff;
+  /*background: #ccccff;*/
 }

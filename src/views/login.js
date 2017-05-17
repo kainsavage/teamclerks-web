@@ -22,6 +22,10 @@ export default class extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    document.title = 'Login - TeamClerks';
+  }
+
   handleUsernameChange(event) {
     this.setState({username: event.target.value, errorMessage: ''});
   }

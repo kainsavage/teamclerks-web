@@ -6,6 +6,17 @@ import {Markdown} from '../components/markdown';
 import './css/post-view.css';
 
 export default class extends Component {
+  componentDidMount() {
+    if(this.props.post.title) {
+      document.title = this.props.post.title + ' - TeamClerks';
+    }
+  }
+
+  componentDidUpdate() {
+    console.log('wat');
+    document.title = this.props.post.title + ' - TeamClerks';
+  }
+
   render() {
     return (
       <div className="readView">

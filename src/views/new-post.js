@@ -17,6 +17,10 @@ export default class extends Component {
     this.onSave = this.onSave.bind(this);
   }
 
+  componentDidMount() {
+    document.title = 'New Post - TeamClerks';
+  }
+
   onCancel() {
     this.setState({redirect:"/"});
   }

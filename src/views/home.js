@@ -21,6 +21,10 @@ export default class extends Component {
     });
   }
 
+  componentDidMount() {
+    document.title = 'Home - TeamClerks';
+  }
+
   render() {
     return (
       <div className="postContainer">
