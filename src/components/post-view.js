@@ -13,7 +13,6 @@ export default class extends Component {
   }
 
   componentDidUpdate() {
-    console.log('wat');
     document.title = this.props.post.title + ' - TeamClerks';
   }
 
