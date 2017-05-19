@@ -53,6 +53,28 @@ export default class {
   /**
    * 
    */
+  static async updatePassword(currentPassword, newPassword) {
+    let data = new URLSearchParams();
+    data.set('currentPassword', currentPassword);
+    data.set('newPassword', newPassword);
+
+    let request = new Request(config.serviceHost + 'user/updatePassword', {
+      method: 'PUT',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.access_token
+      }),
+      body: data
+    });
+
+    let resp = await fetch(request);
+
+    return await resp.json();
+  }
+
+  /**
+   * 
+   */
   static isLoggedIn() {
     if(localStorage.access_token) {
       return true;

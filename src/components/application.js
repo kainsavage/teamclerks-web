@@ -8,6 +8,8 @@ import PostService from '../services/post';
 
 // Views
 import Home from '../views/home';
+import About from '../views/about';
+import Prefs from '../views/prefs';
 import Login from '../views/login';
 import Logout from '../views/logout';
 import NewPost from '../views/new-post';
@@ -65,8 +67,10 @@ export default class extends Component {
             <article>
               <Switch>
                 <Route        exact path="/"         component={Home} />
+                <Route        exact path="/about"    component={About} />
                 <PropsRoute   exact path="/login"    component={Login}   onLoggedIn={this.onLogin} />
                 <PropsRoute   exact path="/logout"   component={Logout}  onLoggedOut={this.onLogout} />
+                <PrivateRoute exact path="/prefs"    component={Prefs} />
                 <PrivateRoute exact path="/new-post" component={NewPost} onUpdateMetadata={this.onUpdateMetadata} />
                 {/* Dynamic routes must be declared AFTER static routes or they will take precedence */}
                 <PropsRoute   exact path="/post/:id" component={Post}    onUpdateMetadata={this.onUpdateMetadata} />

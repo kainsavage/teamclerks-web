@@ -1,0 +1,25 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+}
+
+.row.error {
+  color: red;
+}
+
+.row > .labels, .row > .passwordControls, .row > input[type='submit'] {
+  flex-grow: 0;
+}
+
+.row > .labels {
+  margin-right: 10px;
+}
+
+.row > .labels > label, .row > .passwordControls > input {
+  margin: 2px 0;
+}
+
+.row > .passwordControls {
+  margin-left: 10px;
+}

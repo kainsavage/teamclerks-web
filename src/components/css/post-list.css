@@ -1,3 +1,12 @@
 .created {
   padding-left: 7px;
 }
+
+li {
+  list-style: none;
+}
+
+div > a {
+  padding-left: 40px;
+  margin: 16px 0;
+}

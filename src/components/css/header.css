@@ -3,6 +3,12 @@ header {
   /*background: #ffeebb;*/
 }
 
+header nav > a {
+  margin: 16px 0;
+  padding-right: 40px;
+  float:right;
+}
+
 header nav ul {
   list-style-type: none;
   list-style: none;
