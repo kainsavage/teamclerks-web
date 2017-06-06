@@ -7,8 +7,4 @@ export default class {
     this.updated = data.updated || new Date().getTime();
     this.deleted = data.deleted || false;
   }
-
-  get createdDate() {
-    return new Date(this.created).toDateString();
-  }
 }

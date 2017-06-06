@@ -5,5 +5,10 @@ const monthNames = [
   "November", "December"
 ];
 
+/**
+ * Gets the formatted (yyyy mmm dd) version of the given Date.
+ * @param   {Date} date The date to format
+ * @returns {string} The formatted string
+ */
 export const formatDate = 
   date => date.getFullYear() + ' ' + monthNames[date.getMonth()] + ' ' + date.getDate();

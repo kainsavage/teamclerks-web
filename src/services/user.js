@@ -1,15 +1,16 @@
 import {config} from '../config/config.js';
 
 export default class {
-
   /**
-   * 
-   * @param  {String} user 
-   * @param  {String} password 
+   * Attempts to log in a user.
+   * @param   {string} username The username
+   * @param   {string} password The password
+   * @returns {Promise<boolean>} A promise that is fulfilled with the value of whether
+   *          the user was successfully logged in.
    */
-  static async login(user,password) {
+  static async login(username,password) {
     let data = new FormData();
-    data.append('lhuser', user);
+    data.append('lhuser', username);
     data.append('lhpass', password);
 
     let request = new Request(config.serviceHost + 'login', {
@@ -32,7 +33,12 @@ export default class {
   }
 
   /**
-   * 
+   * Attempts to log the currently logged-in user out.
+   * Note: In reality, simply removing the 'access_token' key from localstorage
+   * will successfully log out a user, but there is bookkeeping on the server
+   * that is helped (though, not strictly necessary) by this call.
+   * @returns {Promise<object>} A promise that is fulfilled with the response
+   *          from whether the user was successfully logged out.
    */
   static async logout() {
     let request = new Request(config.serviceHost + 'logout', {
@@ -51,7 +57,11 @@ export default class {
   }
 
   /**
-   * 
+   * Attempts to update the password of the currently logged in user.
+   * @param   {string} currentPassword The current password for this user
+   * @param   {string} newPassword The proposed password
+   * @returns {Promise<object>} A promise that is fulfilled with the response
+   *          from the password update attempt
    */
   static async updatePassword(currentPassword, newPassword) {
     let data = new URLSearchParams();
@@ -73,19 +83,12 @@ export default class {
   }
 
   /**
-   * 
+   * @returns {boolean} Whether the user is logged in
    */
   static isLoggedIn() {
     if(localStorage.access_token) {
       return true;
     }
     return false;
-  }
-
-  /**
-   * 
-   */
-  static getAuthToken() {
-    return localStorage.access_token;
   }
 }

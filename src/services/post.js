@@ -2,9 +2,11 @@ import {config} from '../config/config.js';
 import Post from '../models/post.js';
 
 export default class {
-  
+
   /**
-   * 
+   * Gets the default list of posts.
+   * @returns {Promise<Post[]>} A promise which is fulfilled with an array
+   *          of Posts.
    */
   static async getPosts() {
     let posts = [];
@@ -20,7 +22,8 @@ export default class {
   }
 
   /**
-   * 
+   * Get the latest post.
+   * @returns {Promise<Post>} A promise which is fulfilled with the latest Post
    */
   static async getLatestPost() {
     let response = await fetch(new Request(config.serviceHost + 'posts/latest'));
@@ -28,7 +31,9 @@ export default class {
   }
 
   /**
-   * 
+   * Gets the metadata for the most recent posts.
+   * @returns {Promise<object[]>} A promise which is fulfilled with an array of
+   *          objects containing the metadata of the most recent posts
    */
   static async getMetadata() {
     let metas = [];
@@ -44,8 +49,10 @@ export default class {
   }
 
   /**
-   * 
-   * @param {Number} id 
+   * Attempts to get a post by its identifier.
+   * @param   {number} id The identifier of a specific post
+   * @returns {Promise<Post>} A promise which is fulfilled with the Post 
+   *          identified by the given identifier
    */
   static async getPost(id) {
     let response = await fetch(new Request(config.serviceHost + 'posts/' + id));
@@ -55,8 +62,10 @@ export default class {
   }
 
   /**
-   * 
-   * @param {Object} post 
+   * Attempts to edit the given post.
+   * @param   {Post} post The post to edit
+   * @returns {Promise<object>} A promise which is fulfilled with the response
+   *          of the attempt to edit the given post
    */
   static async editPost(post) {
     let data = new URLSearchParams();
@@ -74,6 +83,12 @@ export default class {
     return await response.json();
   }
 
+  /**
+   * Attempts to create a new post.
+   * @param   {Post} post The post to create
+   * @returns {Promise<object>} A promise which is fulfilled with the response
+   *          of the attempt to edit the given post
+   */
   static async newPost(post) {
     let data = new URLSearchParams();
     data.set('title', post.title);

@@ -5,6 +5,9 @@ import UserService from '../services/user';
 import './css/header.css';
 
 export default class extends Component {
+  /**
+   * @Override
+   */
   render() {
     return (
       <header>

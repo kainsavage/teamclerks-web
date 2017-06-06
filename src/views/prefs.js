@@ -19,6 +19,10 @@ export default class extends Component {
     this.changePassword = this.changePassword.bind(this);
   }
 
+  /**
+   * Controller for managing state of several inputs.
+   * @param {object} event The event fired when the value of the input changed
+   */
   inputChanged(event) {
     let newState = {};
     newState[event.target.name] = event.target.value;
@@ -26,6 +30,11 @@ export default class extends Component {
     this.setState(newState);
   }
 
+  /**
+   * Controller for managing the changing of a password.
+   * @param {object} event The event fired when the change password form is 
+   *                       submitted.
+   */
   async changePassword(event) {
     event.preventDefault();
 
@@ -40,6 +49,9 @@ export default class extends Component {
     }
   }
 
+  /**
+   * @Override
+   */
   render() {
     return(
       <div>

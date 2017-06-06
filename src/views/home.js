@@ -15,16 +15,25 @@ export default class extends Component {
     }
   }
 
+  /**
+   * Gets the latest post and sets state accordingly.
+   */
   async componentWillMount() {
     this.setState({
       post:  await PostService.getLatestPost()
     });
   }
 
+  /**
+   * Sets the title of the page.
+   */
   componentDidMount() {
     document.title = 'Home - TeamClerks';
   }
 
+  /**
+   * @Override
+   */
   render() {
     return (
       <div className="postContainer">

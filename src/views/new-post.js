@@ -17,18 +17,31 @@ export default class extends Component {
     this.onSave = this.onSave.bind(this);
   }
 
+  /**
+   * Sets the title of the page.
+   */
   componentDidMount() {
     document.title = 'New Post - TeamClerks';
   }
 
+  /**
+   * Sets state when the cancel button is pressed.
+   */
   onCancel() {
     this.setState({redirect:"/"});
   }
 
+  /**
+   * Sets the state when a post is successfully saved.
+   * @param {object} post The post which was saved
+   */
   onSave(post) {
     this.setState({redirect:`/post/${post.id}`});
   }
 
+  /**
+   * @Override
+   */
   render() {
     if(this.state.redirect) {
       return (

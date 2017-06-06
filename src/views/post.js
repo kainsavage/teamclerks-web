@@ -27,6 +27,9 @@ export default class extends Component {
     this.onSave = this.onSave.bind(this);
   }
 
+  /**
+   * Gets the post which belongs to the identifier of this page.
+   */
   async componentWillMount() {
     try {
       this.setState({
@@ -39,6 +42,10 @@ export default class extends Component {
     }
   }
 
+  /**
+   * Gets the identifier of the next page load and gets the post to which
+   * that identifier belongs.
+   */
   async componentWillUpdate(nextProps, nextState) {
     if(nextProps.match.params.id !== this.state.id &&
        nextProps.match.params.id !== nextState.id) {
@@ -55,18 +62,31 @@ export default class extends Component {
     }
   }
 
+  /**
+   * Sets state when the edit button is clicked.
+   */
   onEdit() {
     this.setState({editedPost:Object.assign(new Post(),this.state.post)});
   }
 
+  /**
+   * Sets state when the cancel button is clicked.
+   */
   onCancel() {
     this.setState({editedPost:null});
   }
 
+  /**
+   * Sets the state after a successful save event to the given post.
+   * @param {object} post The post that was successfully saved
+   */
   onSave(post) {
     this.setState({post:post,editedPost:null});
   }
 
+  /**
+   * @Override
+   */
   render() {
     if(this.state.notFound) {
       return (

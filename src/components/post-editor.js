@@ -21,12 +21,21 @@ export default class extends Component {
     this.onEdit = this.onEdit.bind(this);
   }
 
+  /**
+   * Controller for managing state of several inputs.
+   * @param {object} event The event fired when the value of the input changed
+   */
   inputChanged(event) {
     let post = this.state.post;
     post[event.target.name] = event.target.value;
     this.setState({post});
   }
 
+  /**
+   * Controller for managing the saving of a post
+   * @param {object} event The event fired when the edit post form is 
+   *                       submitted.
+   */
   async onSave() {
     this.setState({errors:[]});
     let result;
@@ -51,14 +60,23 @@ export default class extends Component {
     }
   }
 
+  /**
+   * Event that is fired when the preview button is pressed.
+   */
   onPreview() {
     this.setState({preview:true});
   }
 
+  /**
+   * Event that is fired when the edit button is pressed.
+   */
   onEdit() {
     this.setState({preview:false});
   }
 
+  /**
+   * @Override
+   */
   render() {
     if(this.state.preview) {
       return (

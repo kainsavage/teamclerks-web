@@ -17,23 +17,32 @@ export default class extends Component {
       redirect: UserService.isLoggedIn()
     }
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.inputChanged = this.inputChanged.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * Sets the title of the page.
+   */
   componentDidMount() {
     document.title = 'Login - TeamClerks';
   }
 
-  handleUsernameChange(event) {
-    this.setState({username: event.target.value, errorMessage: ''});
+  /**
+   * Controller for managing state of several inputs.
+   * @param {object} event The event that is fired when an input value changes
+   */
+  inputChanged(event) {
+    let newState = {};
+    newState[event.target.name] = event.target.value;
+    newState.errors = [];
+    this.setState(newState);
   }
 
-  handlePasswordChange(event) {
-    this.setState({password: event.target.value, errorMessage: ''});
-  }
-
+  /**
+   * Controller for managing the logging in of a user.
+   * @param {*} event The event fired when the login form is submitted
+   */
   async onSubmit(event) {
     event.preventDefault();
 
@@ -47,6 +56,9 @@ export default class extends Component {
     }
   }
 
+  /**
+   * @Override
+   */
   render() {
     if(this.state.redirect) {
       const { from } = this.props.location.state || { from: { pathname: '/' } }
@@ -61,8 +73,8 @@ export default class extends Component {
           <span>{this.state.errorMessage}</span>
         )}
         <form onSubmit={this.onSubmit}>
-          <label>Username: <input type="text" value={this.state.username} onChange={this.handleUsernameChange} /></label>
-          <label>Password: <input type="password" value={this.state.password} onChange={this.handlePasswordChange} /></label>
+          <label>Username: <input type="text" value={this.state.username} onChange={this.inputChanged} /></label>
+          <label>Password: <input type="password" value={this.state.password} onChange={this.inputChanged} /></label>
           <input type="submit" value="Submit" />
         </form>
       </div>

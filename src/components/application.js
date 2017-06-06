@@ -41,20 +41,32 @@ export default class extends Component {
     this.onUpdateMetadata();
   }
 
+  /**
+   * Gets the metadata and updates the state accordingly.
+   */
   async onUpdateMetadata() {
     let meta = await PostService.getMetadata();
 
     this.setState({meta});
   }
 
+  /**
+   * Callback for having successfully logged in.
+   */
   onLogin() {
     this.setState({loggedIn: true});
   }
 
+  /**
+   * Callback for having successfully logged out.
+   */
   onLogout() {
     this.setState({loggedIn: false});
   }
 
+  /**
+   * @Override
+   */
   render() {
     return (
       <BrowserRouter>

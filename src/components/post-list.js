@@ -7,6 +7,9 @@ import {formatDate} from '../helpers/date-helper';
 import './css/post-list.css';
 
 export default class extends Component {
+  /**
+   * @Override
+   */
   render() {
     return (
       <div>

@@ -15,6 +15,9 @@ export default class extends Component {
     this.logout();
   }
 
+  /**
+   * Sets state when the logout route is visited.
+   */
   async logout() {
     if(UserService.isLoggedIn()) {
       await UserService.logout();
@@ -23,6 +26,9 @@ export default class extends Component {
     this.setState({redirect:true});
   }
 
+  /**
+   * @Override
+   */
   render() {
     if(this.state.redirect) {
       const { from } = this.props.location.state || { from: { pathname: '/' } }

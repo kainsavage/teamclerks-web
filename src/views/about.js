@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 
 export default class extends Component {
-
+  /**
+   * Sets the title of the page.
+   */
   componentDidMount() {
     document.title = 'About - TeamClerks';
   }
 
+  /**
+   * @Override
+   */
   render() {
     return(
       <div>
