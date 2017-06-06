@@ -73,8 +73,8 @@ export default class extends Component {
           <span>{this.state.errorMessage}</span>
         )}
         <form onSubmit={this.onSubmit}>
-          <label>Username: <input type="text" value={this.state.username} onChange={this.inputChanged} /></label>
-          <label>Password: <input type="password" value={this.state.password} onChange={this.inputChanged} /></label>
+          <label>Username: <input name="username" type="text" value={this.state.username} onChange={this.inputChanged} /></label>
+          <label>Password: <input name="password" type="password" value={this.state.password} onChange={this.inputChanged} /></label>
           <input type="submit" value="Submit" />
         </form>
       </div>

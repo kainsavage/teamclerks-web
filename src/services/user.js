@@ -57,16 +57,61 @@ export default class {
   }
 
   /**
+   * Gets the currently logged in user's details.
+   * @returns {Promise<Object>} A promise that is fulfilled with the details of
+   *          the currently logged in user.
+   */
+  static async getUser() {
+    let request = new Request(config.serviceHost + 'user', {
+      method: 'GET',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.access_token
+      })
+    });
+
+    let resp = await fetch(request);
+
+    return await resp.json();
+  }
+
+  /**
+   * Attempts to update the username of the currently logged in user.
+   * @param {string} username The proposed username
+   * @returns {Promise<object>} A promise that is fulfilled with the response
+   *          from the username update attempt
+   */
+  static async updateUsername(username) {
+    let data = new URLSearchParams();
+    data.set('username', username);
+
+    let request = new Request(config.serviceHost + 'user/updateUsername', {
+      method: 'PUT',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.access_token
+      }),
+      body: data
+    });
+    
+    let resp = await fetch(request);
+
+    return await resp.json();
+  }
+
+  /**
    * Attempts to update the password of the currently logged in user.
    * @param   {string} currentPassword The current password for this user
    * @param   {string} newPassword The proposed password
+   * @param   {string} repeatPassword The new password repeated
    * @returns {Promise<object>} A promise that is fulfilled with the response
    *          from the password update attempt
    */
-  static async updatePassword(currentPassword, newPassword) {
+  static async updatePassword(currentPassword, newPassword, repeatPassword) {
     let data = new URLSearchParams();
     data.set('currentPassword', currentPassword);
     data.set('newPassword', newPassword);
+    data.set('repeatPassword', repeatPassword)
 
     let request = new Request(config.serviceHost + 'user/updatePassword', {
       method: 'PUT',
