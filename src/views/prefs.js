@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import UserService from '../services/user';
 
+import Page from '../components/page';
+
 import './css/prefs.css';
 
-export default class extends Component {
+export default class extends Page {
   constructor(props) {
-    super(props);
+    super(props, 'Preferences - TeamClerks');
 
     this.state = {
       username: '',

@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import UserService from '../services/user';
 import { Redirect } from 'react-router-dom';
 
-export default class extends Component {
+import Page from '../components/page';
+
+export default class extends Page {
   constructor(props) {
     super(props);
 

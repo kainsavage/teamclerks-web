@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import UserService from '../services/user';
 import { Redirect } from 'react-router-dom';
 
+import Page from '../components/page';
+
 import './css/login.css';
 
-export default class extends Component {
+export default class extends Page {
   constructor(props) {
-    super(props);
+    super(props,'Login - TeamClerks');
 
     this.onLoggedIn = props.onLoggedIn;
 
@@ -19,13 +21,6 @@ export default class extends Component {
 
     this.inputChanged = this.inputChanged.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  /**
-   * Sets the title of the page.
-   */
-  componentDidMount() {
-    document.title = 'Login - TeamClerks';
   }
 
   /**

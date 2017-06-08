@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Redirect} from 'react-router-dom';
 
 import Post from '../models/post';
 import PostEditor from '../components/post-editor';
 
-export default class extends Component {
+import Page from '../components/page';
+
+export default class extends Page {
   constructor(props) {
-    super(props);
+    super(props,'New Post - TeamClerks');
 
     this.state = {
       post: new Post(),
@@ -15,13 +17,6 @@ export default class extends Component {
 
     this.onCancel = this.onCancel.bind(this);
     this.onSave = this.onSave.bind(this);
-  }
-
-  /**
-   * Sets the title of the page.
-   */
-  componentDidMount() {
-    document.title = 'New Post - TeamClerks';
   }
 
   /**

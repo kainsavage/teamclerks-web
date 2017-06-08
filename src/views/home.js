@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import PostService from '../services/post';
 import PostView from '../components/post-view';
 import Post from '../models/post';
+import Page from '../components/page';
 
 import './css/home.css';
 
-export default class extends Component {
+export default class extends Page {
   constructor(props) {
-    super(props);
+    super(props, 'Home - TeamClerks');
 
     this.state = {
       post: new Post()
@@ -22,13 +23,6 @@ export default class extends Component {
     this.setState({
       post:  await PostService.getLatestPost()
     });
-  }
-
-  /**
-   * Sets the title of the page.
-   */
-  componentDidMount() {
-    document.title = 'Home - TeamClerks';
   }
 
   /**

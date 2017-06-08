@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Page from '../components/page';
 
-export default class extends Component {
-  /**
-   * Sets the title of the page.
-   */
-  componentDidMount() {
-    document.title = 'About - TeamClerks';
+export default class extends Page {
+  constructor(props) {
+    super(props, 'About - TeamClerks');
   }
 
   /**

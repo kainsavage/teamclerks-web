@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import PostService from '../services/post';
 import UserService from '../services/user';
@@ -8,9 +8,11 @@ import Post from '../models/post';
 import PostView from '../components/post-view';
 import PostEditor from '../components/post-editor';
 
+import Page from '../components/page';
+
 import './css/post.css';
 
-export default class extends Component {
+export default class extends Page {
   constructor(props) {
     super(props);
 
@@ -32,8 +34,10 @@ export default class extends Component {
    */
   async componentWillMount() {
     try {
+      let post = await PostService.getPost(this.state.id);
+      this.title = post.title + ' - TeamClerks';
       this.setState({
-        post:  await PostService.getPost(this.state.id),
+        post: post,
         notFound: false
       });
     }
@@ -50,9 +54,11 @@ export default class extends Component {
     if(nextProps.match.params.id !== this.state.id &&
        nextProps.match.params.id !== nextState.id) {
       try {
+        let post = await PostService.getPost(nextProps.match.params.id);
+        this.title = post.title + ' - TeamClerks';
         this.setState({
           id:    nextProps.match.params.id,
-          post:  await PostService.getPost(nextProps.match.params.id),
+          post:  post,
           notFound: false
         });
       }
