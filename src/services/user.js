@@ -1,4 +1,4 @@
-import {config} from '../config/config.js';
+import { config } from '../config/config.js';
 
 export default class {
   /**
@@ -8,7 +8,7 @@ export default class {
    * @returns {Promise<boolean>} A promise that is fulfilled with the value of whether
    *          the user was successfully logged in.
    */
-  static async login(username,password) {
+  static async login(username, password) {
     let data = new FormData();
     data.append('lhuser', username);
     data.append('lhpass', password);
@@ -24,8 +24,8 @@ export default class {
     let fetched = await fetch(request);
     let json = await fetched.json();
 
-    if(json['access_token']) {
-      localStorage.setItem('access_token',json['access_token']);
+    if (json['access_token']) {
+      localStorage.setItem('access_token', json['access_token']);
       return true;
     }
 
@@ -51,7 +51,7 @@ export default class {
 
     await fetch(request);
 
-    if(localStorage.access_token) {
+    if (localStorage.access_token) {
       localStorage.removeItem('access_token');
     }
   }
@@ -93,7 +93,7 @@ export default class {
       }),
       body: data
     });
-    
+
     let resp = await fetch(request);
 
     return await resp.json();
@@ -131,7 +131,7 @@ export default class {
    * @returns {boolean} Whether the user is logged in
    */
   static isLoggedIn() {
-    if(localStorage.access_token) {
+    if (localStorage.access_token) {
       return true;
     }
     return false;

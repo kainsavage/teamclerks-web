@@ -20,6 +20,6 @@ marked.setOptions({
  */
 export const Markdown = ({ content, ...rest }) => {
   return (
-    <div {...rest} dangerouslySetInnerHTML={{__html:marked(content)}}></div>
+    <div {...rest} dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
   );
 };

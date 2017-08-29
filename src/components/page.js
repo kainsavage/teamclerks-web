@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import GA from 'react-ga';
 
 // Config
@@ -17,7 +17,7 @@ import { production } from '../config/config';
 export default class extends Component {
   constructor(props, title) {
     super(props);
-    if(production) {
+    if (production) {
       GA.initialize('UA-100778358-1');
     }
     this.title = title;
@@ -27,10 +27,10 @@ export default class extends Component {
    * @Override
    */
   componentDidMount() {
-    if(this.title !== undefined) {
-      document.title = this.title;
+    if (this.title !== undefined) {
+      document.title = this.title + ' - TeamClerks';
     }
-    if(production) {
+    if (production) {
       GA.set({ page: window.location.pathname });
       GA.pageview(window.location.pathname);
     }
@@ -40,11 +40,11 @@ export default class extends Component {
    * @Override
    */
   componentDidUpdate(prevProps, prevState) {
-    if(this.title !== undefined) {
-      document.title = this.title;
+    if (this.title !== undefined) {
+      document.title = this.title + ' - TeamClerks';
     }
-    if(production) {
-      if(prevProps.location.pathname !== this.props.location.pathname) {
+    if (production) {
+      if (prevProps.location.pathname !== this.props.location.pathname) {
         GA.set({ page: window.location.pathname });
         GA.pageview(window.location.pathname);
       }

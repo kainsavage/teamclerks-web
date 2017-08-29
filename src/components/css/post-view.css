@@ -7,3 +7,18 @@ h1 {
   margin: 0 0 10px 0;
   flex-grow: 1;
 }
+
+.dateBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.dateBar > .created, .dateBar > .edited {
+  margin: 0;
+  padding: 0;
+  color: gray;
+}
+
+.dateBar > .edited {
+  margin-left: 12px;
+}

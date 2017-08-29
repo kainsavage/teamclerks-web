@@ -9,7 +9,7 @@ import './css/home.css';
 
 export default class extends Page {
   constructor(props) {
-    super(props, 'Home - TeamClerks');
+    super(props, 'Home');
 
     this.state = {
       post: new Post()
@@ -21,7 +21,7 @@ export default class extends Page {
    */
   async componentWillMount() {
     this.setState({
-      post:  await PostService.getLatestPost()
+      post: await PostService.getLatestPost()
     });
   }
 

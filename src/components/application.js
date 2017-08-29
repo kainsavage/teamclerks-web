@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { PropsRoute, PrivateRoute } from './routes';
 
@@ -8,6 +8,7 @@ import PostService from '../services/post';
 
 // Views
 import Home from '../views/home';
+import HistoryBlock from '../views/historyblock';
 import About from '../views/about';
 import Prefs from '../views/prefs';
 import Login from '../views/login';
@@ -47,21 +48,21 @@ export default class extends Component {
   async onUpdateMetadata() {
     let meta = await PostService.getMetadata();
 
-    this.setState({meta});
+    this.setState({ meta });
   }
 
   /**
    * Callback for having successfully logged in.
    */
   onLogin() {
-    this.setState({loggedIn: true});
+    this.setState({ loggedIn: true });
   }
 
   /**
    * Callback for having successfully logged out.
    */
   onLogout() {
-    this.setState({loggedIn: false});
+    this.setState({ loggedIn: false });
   }
 
   /**
@@ -78,16 +79,17 @@ export default class extends Component {
             </Gutter>
             <article>
               <Switch>
-                <Route        exact path="/"         component={Home} />
-                <Route        exact path="/about"    component={About} />
-                <PropsRoute   exact path="/login"    component={Login}   onLoggedIn={this.onLogin} />
-                <PropsRoute   exact path="/logout"   component={Logout}  onLoggedOut={this.onLogout} />
-                <PrivateRoute exact path="/prefs"    component={Prefs} />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/historyblock" component={HistoryBlock} />
+                <Route exact path="/about" component={About} />
+                <PropsRoute exact path="/login" component={Login} onLoggedIn={this.onLogin} />
+                <PropsRoute exact path="/logout" component={Logout} onLoggedOut={this.onLogout} />
+                <PrivateRoute exact path="/prefs" component={Prefs} />
                 <PrivateRoute exact path="/new-post" component={NewPost} onUpdateMetadata={this.onUpdateMetadata} />
                 {/* Dynamic routes must be declared AFTER static routes or they will take precedence */}
-                <PropsRoute   exact path="/post/:id" component={Post}    onUpdateMetadata={this.onUpdateMetadata} />
+                <PropsRoute exact path="/post/:id" component={Post} onUpdateMetadata={this.onUpdateMetadata} />
                 {/* Wildcard 404 route */}
-                <Route              path="*"         component={NotFound} />
+                <Route path="*" component={NotFound} />
               </Switch>
             </article>
             <Gutter className="right">

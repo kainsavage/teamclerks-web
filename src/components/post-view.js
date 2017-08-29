@@ -1,27 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import UserService from '../services/user';
-import {Markdown} from '../components/markdown';
+import { Markdown } from '../components/markdown';
+import { formatDatetime } from '../helpers/date-helper';
 
 import './css/post-view.css';
 
 export default class extends Component {
-  /**
-   * Sets the title
-   */
-  componentDidMount() {
-    if(this.props.post.title) {
-      document.title = this.props.post.title + ' - TeamClerks';
-    }
-  }
-
-  /**
-   * Sets the title
-   */
-  componentDidUpdate() {
-    document.title = this.props.post.title + ' - TeamClerks';
-  }
-
   /**
    * @Override
    */
@@ -36,7 +21,17 @@ export default class extends Component {
             </span>
           )}
         </div>
-        <Markdown content={this.props.post.content}/>
+        <div className="dateBar">
+          <span className="created">
+            {formatDatetime(new Date(this.props.post.created))}
+          </span>
+          {this.props.post.created !== this.props.post.updated &&
+            <span className="edited">
+              (edited {formatDatetime(new Date(this.props.post.updated))})
+            </span>
+          }
+        </div>
+        <Markdown content={this.props.post.content} />
       </div>
     );
   }

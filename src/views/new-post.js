@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Post from '../models/post';
 import PostEditor from '../components/post-editor';
@@ -8,7 +8,7 @@ import Page from '../components/page';
 
 export default class extends Page {
   constructor(props) {
-    super(props,'New Post - TeamClerks');
+    super(props, 'New Post');
 
     this.state = {
       post: new Post(),
@@ -23,7 +23,7 @@ export default class extends Page {
    * Sets state when the cancel button is pressed.
    */
   onCancel() {
-    this.setState({redirect:"/"});
+    this.setState({ redirect: "/" });
   }
 
   /**
@@ -31,14 +31,14 @@ export default class extends Page {
    * @param {object} post The post which was saved
    */
   onSave(post) {
-    this.setState({redirect:`/post/${post.id}`});
+    this.setState({ redirect: `/post/${post.id}` });
   }
 
   /**
    * @Override
    */
   render() {
-    if(this.state.redirect) {
+    if (this.state.redirect) {
       return (
         <Redirect to={this.state.redirect} />
       );

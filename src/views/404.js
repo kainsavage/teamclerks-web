@@ -6,14 +6,14 @@ import './css/404.css';
 
 export default class extends Page {
   constructor(props) {
-    super(props,'Page Not Found - TeamClerks');
+    super(props, 'Page Not Found');
   }
 
   /**
    * @Override
    */
   render() {
-    return(
+    return (
       <div>404 - Not found!</div>
     );
   }

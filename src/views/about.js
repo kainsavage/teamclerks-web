@@ -3,14 +3,14 @@ import Page from '../components/page';
 
 export default class extends Page {
   constructor(props) {
-    super(props, 'About - TeamClerks');
+    super(props, 'About');
   }
 
   /**
    * @Override
    */
   render() {
-    return(
+    return (
       <div>
         <h1>About TeamClerks</h1>
         <p>TeamClerks is an entity I founded around 2001. Originally, it was a gaming clan amongst my close friends. Eventually, it grew into a side-business (I built and sold custom gaming computers for a while during college).</p>

@@ -8,7 +8,7 @@ import './css/prefs.css';
 
 export default class extends Page {
   constructor(props) {
-    super(props, 'Preferences - TeamClerks');
+    super(props, 'Preferences');
 
     this.state = {
       username: '',
@@ -29,7 +29,7 @@ export default class extends Page {
   async componentWillMount() {
     let user = await UserService.getUser();
 
-    this.setState({username: user.username});
+    this.setState({ username: user.username });
   }
 
   /**
@@ -56,12 +56,12 @@ export default class extends Page {
 
     let resp = await UserService.updateUsername(this.state.username);
 
-    if(resp.errors) {
+    if (resp.errors) {
       let errors = {
         username: resp.errors,
         password: this.state.errors.password
       };
-      this.setState({errors: errors});
+      this.setState({ errors: errors });
     }
   }
 
@@ -73,14 +73,14 @@ export default class extends Page {
   async changePassword(event) {
     event.preventDefault();
 
-    let resp = await UserService.updatePassword(this.state.currentPassword, 
+    let resp = await UserService.updatePassword(this.state.currentPassword,
       this.state.newPassword, this.state.repeatPassword);
-    if(resp.errors) {
+    if (resp.errors) {
       let errors = {
         password: resp.errors,
         username: this.state.errors.username
       };
-      this.setState({errors: errors});
+      this.setState({ errors: errors });
     }
   }
 
@@ -88,14 +88,14 @@ export default class extends Page {
    * @Override
    */
   render() {
-    return(
+    return (
       <div>
         <h1>Preferences</h1>
-        { this.state.errors.username.map( (error,index) => (
+        {this.state.errors.username.map((error, index) => (
           <div key={index} className="row error">
             {error}
           </div>
-        )) }
+        ))}
         <div className="row">
           <div className="labels">
             <label>Username:</label>
@@ -105,11 +105,11 @@ export default class extends Page {
             <button onClick={this.changeUsername}>Update Username</button>
           </div>
         </div>
-        { this.state.errors.password.map( (error,index) => (
+        {this.state.errors.password.map((error, index) => (
           <div key={index} className="row error">
             {error}
           </div>
-        )) }
+        ))}
         <div className="row">
           <div className="labels">
             <label>New Password:</label>

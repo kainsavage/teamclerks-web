@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import PostView from './post-view';
 import PostService from '../services/post';
@@ -10,7 +10,7 @@ export default class extends Component {
     super(props);
 
     this.state = {
-      post: Object.assign({},this.props.post),
+      post: Object.assign({}, this.props.post),
       preview: false,
       errors: []
     };
@@ -28,7 +28,7 @@ export default class extends Component {
   inputChanged(event) {
     let post = this.state.post;
     post[event.target.name] = event.target.value;
-    this.setState({post});
+    this.setState({ post });
   }
 
   /**
@@ -37,18 +37,18 @@ export default class extends Component {
    *                       submitted.
    */
   async onSave() {
-    this.setState({errors:[]});
+    this.setState({ errors: [] });
     let result;
-    
-    if(this.props.post.id === 0) {
+
+    if (this.props.post.id === 0) {
       result = await PostService.newPost(this.state.post);
     }
     else {
       result = await PostService.editPost(this.state.post);
     }
 
-    if(result.errors) {
-      this.setState({errors: result.errors});
+    if (result.errors) {
+      this.setState({ errors: result.errors });
     }
     else {
       await this.props.onUpdateMetadata();
@@ -64,21 +64,21 @@ export default class extends Component {
    * Event that is fired when the preview button is pressed.
    */
   onPreview() {
-    this.setState({preview:true});
+    this.setState({ preview: true });
   }
 
   /**
    * Event that is fired when the edit button is pressed.
    */
   onEdit() {
-    this.setState({preview:false});
+    this.setState({ preview: false });
   }
 
   /**
    * @Override
    */
   render() {
-    if(this.state.preview) {
+    if (this.state.preview) {
       return (
         <div className="editView">
           <PostView post={this.state.post} />
@@ -90,7 +90,7 @@ export default class extends Component {
     }
     return (
       <div className="editView">
-        {this.state.errors.map( (error, index) => 
+        {this.state.errors.map((error, index) =>
           <div className="errors" key={index}>{error}</div>
         )}
         <input type="text" name="title" value={this.state.post.title} onChange={this.inputChanged} />

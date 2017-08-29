@@ -1,4 +1,4 @@
-import {config} from '../config/config.js';
+import { config } from '../config/config.js';
 import Post from '../models/post.js';
 
 export default class {
@@ -14,7 +14,7 @@ export default class {
     let response = await fetch(new Request(config.serviceHost + 'posts'));
     let json = await response.json();
 
-    json.forEach( (data) => {
+    json.forEach((data) => {
       posts.push(new Post(data));
     });
 
@@ -41,7 +41,7 @@ export default class {
     let response = await fetch(new Request(config.serviceHost + 'posts/metadata'));
     let json = await response.json();
 
-    json.forEach( (data) => {
+    json.forEach((data) => {
       metas.push(new Post(data));
     });
 
@@ -57,7 +57,7 @@ export default class {
   static async getPost(id) {
     let response = await fetch(new Request(config.serviceHost + 'posts/' + id));
     let json = await response.json();
-    
+
     return new Post(json);
   }
 

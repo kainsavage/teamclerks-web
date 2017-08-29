@@ -30,10 +30,10 @@ export const PrivateRoute = ({ component, redirectTo, ...rest }) => {
   return (
     <Route {...rest} render={routeProps => {
       return UserService.isLoggedIn() ? (
-          renderMergedProps(component, routeProps, rest) 
+        renderMergedProps(component, routeProps, rest)
       ) : (
-        <Redirect to={ {pathname: redirectTo, state: { from: routeProps.location }}} />
-      );
-    }}/>
+          <Redirect to={{ pathname: redirectTo, state: { from: routeProps.location } }} />
+        );
+    }} />
   );
 };

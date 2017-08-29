@@ -8,7 +8,7 @@ import './css/login.css';
 
 export default class extends Page {
   constructor(props) {
-    super(props,'Login - TeamClerks');
+    super(props, 'Login');
 
     this.onLoggedIn = props.onLoggedIn;
 
@@ -42,12 +42,12 @@ export default class extends Page {
     event.preventDefault();
 
     let success = await UserService.login(this.state.username, this.state.password);
-    if(success) {
+    if (success) {
       this.onLoggedIn();
-      this.setState({redirect:true});
+      this.setState({ redirect: true });
     }
     else {
-      this.setState({errorMessage: "Invalid Login"});
+      this.setState({ errorMessage: "Invalid Login" });
     }
   }
 
@@ -55,16 +55,16 @@ export default class extends Page {
    * @Override
    */
   render() {
-    if(this.state.redirect) {
+    if (this.state.redirect) {
       const { from } = this.props.location.state || { from: { pathname: '/' } }
       return (
-        <Redirect to={from}/>
+        <Redirect to={from} />
       );
     }
 
     return (
       <div>
-        { this.state.errorMessage && (
+        {this.state.errorMessage && (
           <span>{this.state.errorMessage}</span>
         )}
         <form onSubmit={this.onSubmit}>

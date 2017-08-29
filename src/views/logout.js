@@ -21,21 +21,21 @@ export default class extends Page {
    * Sets state when the logout route is visited.
    */
   async logout() {
-    if(UserService.isLoggedIn()) {
+    if (UserService.isLoggedIn()) {
       await UserService.logout();
     }
 
-    this.setState({redirect:true});
+    this.setState({ redirect: true });
   }
 
   /**
    * @Override
    */
   render() {
-    if(this.state.redirect) {
+    if (this.state.redirect) {
       const { from } = this.props.location.state || { from: { pathname: '/' } }
       return (
-        <Redirect to={from}/>
+        <Redirect to={from} />
       );
     }
     return (

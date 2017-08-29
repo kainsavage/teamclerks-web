@@ -17,8 +17,8 @@ export default class extends Page {
     super(props);
 
     this.state = {
-      id:    props.match.params.id,
-      post:  new Post(),
+      id: props.match.params.id,
+      post: new Post(),
       editedPost: null,
       previewPost: null,
       notFound: false
@@ -35,14 +35,14 @@ export default class extends Page {
   async componentWillMount() {
     try {
       let post = await PostService.getPost(this.state.id);
-      this.title = post.title + ' - TeamClerks';
+      this.title = post.title;
       this.setState({
         post: post,
         notFound: false
       });
     }
-    catch(e) {
-      this.setState({notFound:true});
+    catch (e) {
+      this.setState({ notFound: true });
     }
   }
 
@@ -51,19 +51,19 @@ export default class extends Page {
    * that identifier belongs.
    */
   async componentWillUpdate(nextProps, nextState) {
-    if(nextProps.match.params.id !== this.state.id &&
-       nextProps.match.params.id !== nextState.id) {
+    if (nextProps.match.params.id !== this.state.id &&
+      nextProps.match.params.id !== nextState.id) {
       try {
         let post = await PostService.getPost(nextProps.match.params.id);
-        this.title = post.title + ' - TeamClerks';
+        this.title = post.title;
         this.setState({
-          id:    nextProps.match.params.id,
-          post:  post,
+          id: nextProps.match.params.id,
+          post: post,
           notFound: false
         });
       }
-      catch(e) {
-        this.setState({notFound:true});
+      catch (e) {
+        this.setState({ notFound: true });
       }
     }
   }
@@ -72,14 +72,14 @@ export default class extends Page {
    * Sets state when the edit button is clicked.
    */
   onEdit() {
-    this.setState({editedPost:Object.assign(new Post(),this.state.post)});
+    this.setState({ editedPost: Object.assign(new Post(), this.state.post) });
   }
 
   /**
    * Sets state when the cancel button is clicked.
    */
   onCancel() {
-    this.setState({editedPost:null});
+    this.setState({ editedPost: null });
   }
 
   /**
@@ -87,20 +87,20 @@ export default class extends Page {
    * @param {object} post The post that was successfully saved
    */
   onSave(post) {
-    this.setState({post:post,editedPost:null});
+    this.setState({ post: post, editedPost: null });
   }
 
   /**
    * @Override
    */
   render() {
-    if(this.state.notFound) {
+    if (this.state.notFound) {
       return (
         <NotFound />
       );
     }
 
-    if(UserService.isLoggedIn() && this.state.editedPost) {
+    if (UserService.isLoggedIn() && this.state.editedPost) {
       return (
         <div className="postContainer">
           <PostEditor post={this.state.editedPost} onUpdateMetadata={this.props.onUpdateMetadata} onCancel={this.onCancel} onSave={this.onSave} />
